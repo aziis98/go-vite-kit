@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: 'Inter', 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
+    font-size: 16px;
+}
+
+// Headings
+
+$base-font-size: 18px;
+$heading-scale: 1.33;
+
+@function pow($number, $exponent) {
+    $value: 1;
+
+    @if $exponent > 0 {
+        @for $i from 1 through $exponent {
+            $value: $value * $number;
+        }
+    }
+
+    @return $value;
+}
+
+@for $i from 1 through 5 {
+    h#{$i} {
+        margin: 0;
+
+        $factor: pow($heading-scale, 5 - $i);
+        font-size: $base-font-size * $factor;
+
+        line-height: 1.5;
+    }
+}

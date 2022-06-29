@@ -1,0 +1,9 @@
+# NodeJS
+node_modules/
+
+# Server
+server
+
+# Local Files
+.env
+*.local*
