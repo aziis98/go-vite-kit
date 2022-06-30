@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"log"
@@ -7,11 +7,11 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var Config struct {
+var (
 	Mode    string
 	Host    string
 	BaseURL string
-}
+)
 
 func loadEnv(key string, defaultValue ...string) string {
 	env := os.Getenv(key)
@@ -31,7 +31,7 @@ func init() {
 	// Load Config
 	godotenv.Load()
 
-	Config.Mode = loadEnv(os.Getenv("MODE"), "development")
-	Config.Host = loadEnv(os.Getenv("HOST"), ":4000")
-	Config.BaseURL = loadEnv(os.Getenv("HOST"), "http://localhost:4000")
+	Mode = loadEnv(os.Getenv("MODE"), "development")
+	Host = loadEnv(os.Getenv("HOST"), ":4000")
+	BaseURL = loadEnv(os.Getenv("HOST"), "http://localhost:4000")
 }
