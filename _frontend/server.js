@@ -2,6 +2,7 @@ import { dirname, resolve } from 'path'
 import express from 'express'
 import { createServer as createViteServer } from 'vite'
 import { fileURLToPath } from 'url'
+import { readFile } from 'fs/promises'
 
 import routes from './routes.js'
 
@@ -17,11 +18,15 @@ async function createServer(customHtmlRoutes) {
     })
 
     for (const [route, file] of Object.entries(customHtmlRoutes)) {
-        app.get(route, (req, res) => {
+        app.get(route, async (req, res) => {
             const filePath = resolve(__dirname, file)
             console.log(`Custom Route: %s`, req.url)
 
-            return res.sendFile(filePath)
+            const htmlFile = await readFile(filePath, 'utf8')
+            const htmlViteHooksFile = await vite.transformIndexHtml(req.originalUrl, htmlFile)
+
+            res.setHeader('Content-Type', 'text/html')
+            return res.send(htmlViteHooksFile)
         })
     }
 
