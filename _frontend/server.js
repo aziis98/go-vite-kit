@@ -3,6 +3,8 @@ import express from 'express'
 import { createServer as createViteServer } from 'vite'
 import { fileURLToPath } from 'url'
 
+import routes from './routes.js'
+
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function createServer(customHtmlRoutes) {
@@ -28,7 +30,4 @@ async function createServer(customHtmlRoutes) {
     app.listen(3000)
 }
 
-createServer({
-    // Useful for developing with dynamic routes
-    '/': './index.html',
-})
+createServer(routes)

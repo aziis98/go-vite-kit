@@ -1,7 +1,8 @@
 # NodeJS
 node_modules/
+dist/
 
-# Server
+# Server Executable
 server
 
 # Local Files
