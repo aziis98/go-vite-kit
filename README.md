@@ -37,11 +37,13 @@ Minimal boilerplate project for a Golang server using [Fiber](https://github.com
 
 ## Usage
 
-First install the required npm packages
+To setup the project first install the required npm packages
 
 ```bash
 $ npm install
 ```
+
+then you can start versioning the **lock file** of your package manager.
 
 ### Development
 
