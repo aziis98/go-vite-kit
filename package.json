@@ -5,7 +5,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "dev": "node server.js",
+        "dev": "node meta/dev-server.js",
         "build": "vite build"
     },
     "license": "MIT",
@@ -13,5 +13,8 @@
         "express": "^4.18.1",
         "sass": "^1.53.0",
         "vite": "^2.9.13"
+    },
+    "dependencies": {
+        "axios": "^1.4.0"
     }
 }

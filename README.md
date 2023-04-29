@@ -1,6 +1,6 @@
 # Go Vite Kit
 
-Minimal boilerplate project for a Golang server using [Fiber](https://github.com/gofiber/fiber) and [ViteJS](https://vitejs.dev/) for static pages
+Minimal boilerplate project for a Golang server using [Fiber](https://github.com/gofiber/fiber) and [ViteJS](https://github.com/vitejs/vite) for static pages
 
 ## Features
 
@@ -11,51 +11,56 @@ Minimal boilerplate project for a Golang server using [Fiber](https://github.com
 
 ## Architecture
 
--   `_frontend/`
+-   `frontend/`
 
     This is a Vite project for building all the static pages used by this app.
 
-    The `routes.js` (this is used both from `server.js` for _serving_ and from `vite.config.js` for _building_) file contains a mapping from express route patterns to entry html files, this is useful for rendering the same page for multiple urls in development mode.
+-   `backend/`
 
--   `database/`
+    This keeps all server related files
 
-    Module with a `Database` interface and two implementation: `memDB` is an in-memory database for testing purposes. `sqliteDB` is a wrapper for working with an SQLite database.
+    -   `config/`
 
--   `routes/`
+        Loads env variables and keeps them as globals 
 
-    Various functions for configuring all the server routes.
+    -   `database/`
+
+        Module with a `Database` interface and two implementation: `memDB` is an in-memory database for testing purposes. `sqliteDB` is a wrapper for working with an SQLite database.
+
+    -   `routes/`
+
+        Various functions for configuring all the server routes.
+
+        A very important file is `backend/routes/router.go` that contains the `HtmlEntrypoints` variable that is used both by the backend and ViteJS to mount HTML entrypoints. 
+        
+        When building the frontend ViteJS will call `go run ./cmd/routes` to read the content of this variabile, while during development a special route called `/dev/routes` gets mounted on the backend server and this lets Vite add all necessary entrypoints to the dev server.
 
 ## Usage
 
 First install the required npm packages
 
 ```bash
-$ cd _frontend
-_frontend/ $ npm install
+$ npm install
 ```
 
 ### Development
 
 ```bash
 # Development
-$ MODE=dev go run -v .
+$ MODE=dev go run -v ./cmd/server
 
 # Development with watcher
-$ fd -e go | MODE=dev entr -r go run -v .
+$ fd -e go | MODE=dev entr -r go run -v ./cmd/server
 ```
 
 ### Production
 
-First build the `_frontend/dist` folder using
+You can build everything with the following command, it will build first the frontend and then the backend and generate `./out/server`. 
 
 ```bash
-$ cd _frontend
-$ npm run build
-```
+# Build
+$ go run -v ./cmd/build
 
-and then
-
-```bash
-# Production
-$ go run -v .
+# Run
+$ ./out/server
 ```

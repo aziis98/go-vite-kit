@@ -1,10 +1,8 @@
-# NodeJS
-node_modules/
-dist/
-
-# Server Executable
-server
-
-# Local Files
 .env
 *.local*
+bin/
+
+.out/
+out/
+dist/
+node_modules/

@@ -31,7 +31,7 @@ func init() {
 	// Load Config
 	godotenv.Load()
 
-	Mode = loadEnv(os.Getenv("MODE"), "development")
-	Host = loadEnv(os.Getenv("HOST"), ":4000")
-	BaseURL = loadEnv(os.Getenv("HOST"), "http://localhost:4000")
+	Mode = loadEnv("MODE", "development")
+	Host = loadEnv("HOST", ":4000")
+	BaseURL = loadEnv("BASE_URL", "http://localhost:4000")
 }
