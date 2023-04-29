@@ -40,6 +40,7 @@ Minimal boilerplate project for a Golang server using [Fiber](https://github.com
 To setup the project first install the required npm packages
 
 ```bash
+# Install all JS dependencies
 $ npm install
 ```
 
