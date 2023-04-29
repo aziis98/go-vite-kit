@@ -44,10 +44,6 @@ func main() {
 	app.Route("/api", router.Api)
 
 	if strings.HasPrefix(config.Mode, "dev") {
-		app.Get("/dev/routes", func(c *fiber.Ctx) error {
-			return c.JSON(routes.HtmlEntrypoints)
-		})
-
 		setupDevServer()
 	}
 

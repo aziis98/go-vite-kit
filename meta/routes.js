@@ -1,13 +1,7 @@
 import { spawn } from 'child_process'
-import axios from 'axios'
 
 function transformRoutes(entrypoints) {
     return Object.fromEntries(entrypoints.map(({ route, filename }) => [route, filename]))
-}
-
-export async function getDevelopmentRoutes() {
-    const res = await axios.get('http://127.0.0.1:4000/dev/routes')
-    return transformRoutes(res.data)
 }
 
 export async function getBuildRoutes() {
@@ -40,5 +34,6 @@ export async function getBuildRoutes() {
         })
     }
 
-    return transformRoutes(await readCommandOutputAsJSON('go run ./cmd/routes'))
+    console.log('loading build entrypoints...')
+    return transformRoutes(await readCommandOutputAsJSON('go run ./meta/routes'))
 }

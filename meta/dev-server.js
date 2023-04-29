@@ -3,7 +3,7 @@ import express from 'express'
 import { createServer as createViteServer } from 'vite'
 import { readFile } from 'fs/promises'
 
-import { getDevelopmentRoutes } from './routes.js'
+import { getBuildRoutes } from './routes.js'
 
 async function createServer() {
     const app = express()
@@ -14,9 +14,9 @@ async function createServer() {
         server: { middlewareMode: 'html' },
     })
 
-    const routes = await getDevelopmentRoutes()
+    const routes = await getBuildRoutes()
 
-    console.log(`Mounting static routes:`)
+    console.log(`mounting static routes...`)
     for (const [route, file] of Object.entries(routes)) {
         const filePath = join('./frontend', file)
         console.log(`- "%s" => %s`, route, filePath)

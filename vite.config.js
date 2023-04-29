@@ -1,12 +1,17 @@
 import { defineConfig } from 'vite'
-import { getBuildRoutes, getDevelopmentRoutes } from './meta/routes.js'
+import { getBuildRoutes } from './meta/routes.js'
 
 import { join } from 'path'
 
-export default defineConfig(async config => {
-    const routes = config.command === 'build' ? await getBuildRoutes() : await getDevelopmentRoutes()
+export default defineConfig(async () => {
+    const routes = await getBuildRoutes()
+    console.log('html entrypoints:')
+    for (const [route, filename] of Object.entries(routes)) {
+        console.log(`- "${route}" => ${filename}`)
+    }
+    console.log()
+
     const entryPoints = Object.values(routes)
-    console.log('Found entrypoints:', entryPoints)
 
     return {
         root: './frontend',
