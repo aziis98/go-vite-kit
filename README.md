@@ -33,7 +33,7 @@ Minimal boilerplate project for a Golang server using [Fiber](https://github.com
 
         A very important file is `backend/routes/router.go` that contains the `HtmlEntrypoints` variable that is used both by the backend and ViteJS to mount HTML entrypoints. 
         
-        When building the frontend ViteJS will call `go run ./cmd/routes` to read the content of this variabile. This is also used while developing to let Vite know add all necessary entrypoints to the dev server.
+        When building the frontend ViteJS will call `go run ./meta/routes` to read the content of the `HtmlEntrypoints` variable. This is also used while developing to let Vite know add all necessary entrypoints to the dev server.
 
 ## Usage
 
